@@ -2,11 +2,12 @@ import { UPDATE_BUSINESS_INFO } from "../actions/actions";
 
 const initialBusinessState = {
   service_provided: "",
-  minority_ownership: "",
+  minority_ownership: false,
   authorized_name: "",
   authorized_phone_number: "",
   authorized_signature: "",
 };
+
 
 const basicBusinessReducer = (state = initialBusinessState, action) => {
   switch (action.type) {

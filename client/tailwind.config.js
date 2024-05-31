@@ -5,7 +5,19 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'custom-bg': "url('../src/assets/images/Wrigley_Field_02.webp')"
+      },
+      backgroundPosition: {
+        'left-center': '-300px center',
+      },
+      colors: {
+        'cubblue': '#1B2D53',
+        'cubred': '#CF102B',
+        'white': '#FFFFFF',
+      },
+    },
   },
   plugins: [],
 }

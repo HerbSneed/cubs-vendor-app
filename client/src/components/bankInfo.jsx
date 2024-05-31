@@ -13,7 +13,7 @@ const BankInfo = ({ bankInfo, updateBankInfo }) => {
     event.preventDefault();
     try {
       updateBankInfo(bankInfo);
-      navigate("/vendor-info-review");
+      navigate("/vendor/review-info");
     } catch (err) {
       setError("Basic information is not correct");
       console.error("Basic Info error", err);

@@ -12,24 +12,8 @@ const Vendor = () => {
   const [isBuisnessComplete, setIsBuisnessComplete] = useState(false);
   const [isBankComplete, setIsBankComplete] = useState(false);
 
-  // const handleBasicClick = () => {
-  //   setIsBasicComplete(true);
-  // };
-
-  // const handleDisclaimerAgreement = () => {
-  //   setIsDisclaimerAgreement(true);
-  // };
-
-  // const handleBuisnessComplete = () => {
-  //   setIsBuisnessComplete(true);
-  // };
-
-  //   const handleBankComplete = () => {
-  //     setIsBankComplete(true);
-  //   };
-
   return (
-    <div className="bg-cubsBlue h-screen">
+    <div className="bg-cubsBlue">
       {isBasicComplete ? (
         isDisclaimerAgreement ? (
           isBuisnessComplete ? (

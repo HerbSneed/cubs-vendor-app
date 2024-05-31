@@ -1,52 +1,46 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { updateBusinessInfo } from "../../src/utils/redux/actions/actions";
-import SignaturePad from 'signature_pad';
-
+import SignatureCanvas from "react-signature-canvas";
 
 const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
-  console.log("businessInfo", businessInfo);
-    const navigate = useNavigate();
-    const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const signaturePadRef = useRef(null);
+  const canvasContainerRef = useRef(null);
 
+  useEffect(() => {
+    const handleResize = () => {
+      const canvas = signaturePadRef.current.getCanvas();
+      const container = canvasContainerRef.current;
 
-    useEffect(() => {
-      const canvas = document.getElementById("signature-pad");
-      const signatureInput = document.querySelector("#authorized_signature");
-      const clearSignatureButton = document.querySelector("#clearSignature");
-
-      function resizeCanvas() {
+      if (canvas && container) {
         const ratio = Math.max(window.devicePixelRatio || 1, 1);
-        canvas.width = canvas.offsetWidth * ratio;
-        canvas.height = canvas.offsetHeight * ratio;
+        canvas.width = container.offsetWidth * ratio;
+        canvas.height = container.offsetHeight * ratio;
         canvas.getContext("2d").scale(ratio, ratio);
       }
+    };
 
-      window.addEventListener("resize", resizeCanvas);
-      resizeCanvas();
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-      const signaturePad = new SignaturePad(canvas, {
-        backgroundColor: "rgb(250, 250, 250)",
-      });
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-      clearSignatureButton.addEventListener("click", function () {
-        signaturePad.clear();
-        signatureInput.value = "";
-      });
-
-      return () => {
-        window.removeEventListener("resize", resizeCanvas);
-      };
-    }, []);
-
-    const handleBusinessClick = async (event) => {
+  const handleBusinessClick = async (event) => {
     event.preventDefault();
     try {
-      updateBusinessInfo(businessInfo);
-
+      if (signaturePadRef.current) {
+        const dataURL = signaturePadRef.current
+          .getTrimmedCanvas()
+          .toDataURL("image/png");
+        updateBusinessInfo({ authorized_signature: dataURL });
+      }
       navigate("/vendor/bank-info");
-      
     } catch (err) {
       setError("Bank information is not correct");
       console.error("Basic Info error", err);
@@ -55,8 +49,14 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
-    updateBusinessInfo({ [name]: type === "checkbox" ? checked : value,
-    });
+    updateBusinessInfo({ [name]: type === "checkbox" ? checked : value });
+  };
+
+  const clearSignature = () => {
+    if (signaturePadRef.current) {
+      signaturePadRef.current.clear();
+      updateBusinessInfo({ authorized_signature: "" });
+    }
   };
 
   return (
@@ -132,28 +132,29 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
             />
           </div>
 
-          <div className="flex flex-col w-full sm:h-64">
+          <div
+            className="flex flex-col w-full sm:h-64"
+            ref={canvasContainerRef}
+          >
             <label htmlFor="authorized_signature" className="text-white">
               Authorized Signature
             </label>
-            <canvas
-              id="signature-pad"
-              className="border bg-white my-2 sm:w-full sm:h-3/4"
-            ></canvas>
+            <SignatureCanvas
+              ref={signaturePadRef}
+              penColor="black"
+              canvasProps={{
+                className: "signature-canvas w-full h-full",
+                style: { backgroundColor: "white" },
+              }}
+            />
             <button
               type="button"
+              onClick={clearSignature}
               id="clearSignature"
               className="bg-cubred rounded px-2 sm:w-1/3 lg:w-1/3 text-white"
             >
               Clear Signature
             </button>
-            <input
-              type="hidden"
-              name="authorized_signature"
-              id="authorized_signature"
-              value={businessInfo.authorized_signature}
-              onChange={handleChange}
-            />
           </div>
 
           <div className="py-2 signup">
@@ -180,4 +181,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BusinessInfo);
-

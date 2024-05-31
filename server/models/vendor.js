@@ -73,11 +73,11 @@ Vendor.init(
       allowNull: false,
     },
     authorized_phone_number: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.STRING(20),
       allowNull: false,
     },
     authorized_signature: {
-      type: DataTypes.BLOB,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     bank_name: {
@@ -85,39 +85,45 @@ Vendor.init(
       allowNull: false
     },
     account_number: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.STRING,
       allowNull: false
     },
     routing_number: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.STRING,
       allowNull: false
     }
   },
   {
-  hooks: {
+    hooks: {
       async beforeCreate(newVendor) {
         try {
           newVendor.tax_id = await bcrypt.hash(newVendor.tax_id, 10);
+          newVendor.account_number = await bcrypt.hash(newVendor.account_number, 10);
+          newVendor.routing_number = await bcrypt.hash(newVendor.routing_number, 10);
         } catch (error) {
-          // Handle the error, e.g., log it or throw a specific error
           throw new Error('Failed to hash tax_id');
         }
         return newVendor;
       },
-  async beforeUpdate(updatedtaxid) {
-    updatedtaxid.tax_id = await bcrypt.hash(
-      updatedtaxid.tax_id,
-      10
-    );
-    return updatedtaxid;
-  },
-},
-  sequelize,
-  underscored: true,
-  freezeTableName: true,
-  modelName: 'vendor',
-}
-);
 
+      async beforeUpdate(updatedVendor) {
+        if (updatedVendor.changed('tax_id')) {
+          updatedVendor.tax_id = await bcrypt.hash(updatedVendor.tax_id, 10);
+        }
+        if (updatedVendor.changed('account_number')) {
+          updatedVendor.account_number = await bcrypt.hash(updatedVendor.account_number, 10);
+        }
+        if (updatedVendor.changed('routing_number')) {
+          updatedVendor.routing_number = await bcrypt.hash(updatedVendor.routing_number, 10);
+        }
+        return updatedVendor;
+      },
+    },
+    sequelize,
+    underscored: true,
+    freezeTableName: true,
+    modelName: 'vendor',
+  }
+);
 
 module.exports = Vendor;

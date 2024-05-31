@@ -3,7 +3,7 @@ import { UPDATE_BANK_INFO } from "../actions/actions";
 const initialBankState = {
   bank_name: "",
   account_number: "",
-  rounting_number: ""
+  routing_number: ""
 };
 
 const basicBankReducer = (state = initialBankState, action) => {

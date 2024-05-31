@@ -1,23 +1,19 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Welcome from "../components/welcome";
-import BasicInfo from "../components/basicInfo";
+
 
 const Landing = () => {
-  const [isNewVendor, setIsNewVendor] = useState(false);
+  const navigate = useNavigate();
 
   const handleNewVendorClick = () => {
-    setIsNewVendor(true);
+    navigate('/vendor/new-vendor')
+
   };
 
   return (
-    <div className="bg-cubsBlue h-screen">
-      {isNewVendor ? (
-        <BasicInfo />
-      ) : (
-        <Welcome onNewVendorClick={handleNewVendorClick} />
-      )}
-
-    </div>
+    <>
+      <Welcome onNewVendorClick={handleNewVendorClick} />
+    </>
   );
 };
 
