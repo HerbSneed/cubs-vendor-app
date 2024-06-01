@@ -3,9 +3,14 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import { updateBasicInfo } from "../../src/utils/redux/actions/actions";
 
+
 const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+
+  const handleBackClick = () => {
+    navigate(-1);
+  };
 
   const handleBasicClick = async (event) => {
     event.preventDefault();
@@ -48,7 +53,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
         id="basicInfoForm"
         method="POST"
         onSubmit={handleBasicClick}
-        className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col gap-2 p-3 w-11/12 lg:w-1/2 xl:w-1/2"
+        className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col my-[10%] gap-2 p-3 w-11/12  lg:w-1/2 xl:w-1/2"
       >
         <div className="flex flex-wrap gap-x-2">
           <label htmlFor="vendor" className="text-white w-full">
@@ -61,7 +66,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             value={basicInfo.vendor_name}
             onChange={handleChange}
             placeholder="Your Vendor Name"
-            className="bg-white w-full my-2 p-3"
+            className="bg-white w-full mb-3 p-3"
           />
 
           <label htmlFor="contact_info" className="text-white w-full">
@@ -75,7 +80,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               value={basicInfo.contact_firstName}
               onChange={handleChange}
               placeholder="First Name"
-              className="bg-white w-5/12 my-2 p-3 mr-2"
+              className="bg-white w-5/12 mb-3 p-3 mr-2"
             />
             <input
               type="text"
@@ -84,7 +89,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               value={basicInfo.contact_lastName}
               onChange={handleChange}
               placeholder="Last Name"
-              className="bg-white w-5/12 my-2 p-3 mr-2"
+              className="bg-white w-5/12 mb-3 p-3 mr-2"
             />
             <input
               type="text"
@@ -93,7 +98,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               value={basicInfo.contact_MiddleInt}
               onChange={handleChange}
               placeholder="M.I."
-              className="bg-white w-2/12 my-2 p-3"
+              className="bg-white w-2/12 mb-3 p-3"
             />
           </div>
 
@@ -110,7 +115,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
                 value={basicInfo.contact_phone_number}
                 onChange={handleChange}
                 placeholder="Phone Number"
-                className="bg-white my-2 p-3 w-full"
+                className="bg-white mb-3 p-3 w-full"
               />
             </div>
 
@@ -126,7 +131,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
                 value={basicInfo.tax_id}
                 onChange={handleChange}
                 placeholder="Tax ID or SSN"
-                className="bg-white my-2 p-3 w-full"
+                className="bg-white mb-3 p-3 w-full"
               />
             </div>
           </div>
@@ -142,7 +147,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               value={basicInfo.remittance_address}
               onChange={handleChange}
               placeholder="Street Address or P.O. Box"
-              className="bg-white my-2 p-3"
+              className="bg-white mb-3 p-3"
             />
           </div>
 
@@ -157,7 +162,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               value={basicInfo.city}
               onChange={handleChange}
               placeholder="City"
-              className="bg-white my-2 p-3"
+              className="bg-white mb-3 p-3"
             />
           </div>
 
@@ -172,7 +177,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               value={basicInfo.state}
               onChange={handleChange}
               placeholder="State"
-              className="bg-white my-2 p-3"
+              className="bg-white mb-3 p-3"
             />
           </div>
 
@@ -187,7 +192,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               value={basicInfo.zip_code}
               onChange={handleChange}
               placeholder="Zip Code"
-              className="bg-white my-2 p-3"
+              className="bg-white mb-3 p-3"
             />
           </div>
 
@@ -202,7 +207,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               value={basicInfo.country}
               onChange={handleChange}
               placeholder="Country"
-              className="bg-white my-2 p-3"
+              className="bg-white mb-3 p-3"
             />
           </div>
 
@@ -217,16 +222,25 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               value={basicInfo.remittance_email}
               onChange={handleChange}
               placeholder="Remittance Email"
-              className="bg-white my-2 p-3 w-full"
+              className="bg-white mb-3 p-3 w-full"
             />
           </div>
         </div>
 
-        <div className="mt-auto w-full">
+        <div className="mt-3 flex gap-x-3">
+          <button
+            type="button"
+            id="newVendorSubmit"
+            onClick={ handleBackClick }
+            className="hover:border-cubred text-center bg-cubred  border text-white px-4 py-3 rounded-md font-medium w-full rounded-md border  hover:border-cubblue"
+          >
+            Back
+          </button>
+
           <button
             type="submit"
             id="newVendorSubmit"
-            className="hover:border-white bg-cubred border-cubred border-2 text-white px-4 py-3 rounded-xl font-medium w-full"
+            className="hover:border-cubred bg-cubred  border text-white px-4 py-3 rounded-md font-medium w-full rounded-md border  hover:border-cubblue"
           >
             Next
           </button>

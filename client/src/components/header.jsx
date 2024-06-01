@@ -6,15 +6,16 @@ const Header = () => {
     <>
       <header
         id="main"
-        className="sticky z-50 top-0 bg-cubblue py-2 mx-auto"
+        className="sticky z-50 top-0 bg-cubblue py-1 mx-auto"
       >
-        <div>
+        <a
+          href="/">
           <img
             src={CubsRedLogo}
             alt="cubs red logo"
-            className="w-[35%] mx-auto"
+            className="w-[40%] mx-auto"
           />
-        </div>
+        </a>
       </header>
     </>
   );

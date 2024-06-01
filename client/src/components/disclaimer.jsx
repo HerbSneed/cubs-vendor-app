@@ -18,8 +18,8 @@ const Disclaimer = () => {
 
 
   return (
-    <div>
-      <p className="my-2 text-center text-white mx-4">
+    <div className="bg-cubblue shadow-lg w-full bg-opacity-50 py-[10%]">
+      <p className="text-center text-white mx-4">
         Except in limited situations, the Company*** is not eligible for any
         state sales tax exemptions, and as such, expects its vendors and
         suppliers to charge it the appropriate local sales tax on taxable
@@ -38,10 +38,16 @@ const Disclaimer = () => {
       </p>
 
       <div className="text-white mt-6 font-bold flex justify-evenly">
-        <button className="bg-cubred py-2 px-5 rounded-md" onClick={handleAgree}>
+        <button
+          className="bg-cubred py-2 px-6 hover:border-cubred bg-cubred  border text-white px-4 py-3 rounded-md  hover:bg-cubblue rounded-md border  hover:border-cubblue rounded-md"
+          onClick={handleAgree}
+        >
           Agree
         </button>
-        <button className="bg-cubred p-2 rounded-md" onClick={handleDisagree}>
+        <button
+          className="bg-cubred p-2 hover:border-cubred bg-cubred  border text-white px-4 py-3 rounded-md  hover:bg-cubblue rounded-md border  hover:border-cubblue rounded-md"
+          onClick={handleDisagree}
+        >
           Disagree
         </button>
       </div>

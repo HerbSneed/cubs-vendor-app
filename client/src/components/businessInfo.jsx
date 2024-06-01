@@ -31,19 +31,40 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
     };
   }, []);
 
+   const handleBackClick = () => {
+     navigate(-1);
+   };
+
   const handleBusinessClick = async (event) => {
     event.preventDefault();
+
+    const {
+      service_provided,
+      minority_ownership,
+      authorized_name,
+      authorized_phone_number,
+    } = businessInfo;
+    const authorized_signature = signaturePadRef.current.isEmpty()
+      ? ""
+      : signaturePadRef.current.toDataURL();
+
+    if (
+      !service_provided ||
+      !minority_ownership === undefined ||
+      !authorized_name ||
+      !authorized_phone_number ||
+      !authorized_signature
+    ) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
     try {
-      if (signaturePadRef.current) {
-        const dataURL = signaturePadRef.current
-          .getTrimmedCanvas()
-          .toDataURL("image/png");
-        updateBusinessInfo({ authorized_signature: dataURL });
-      }
+      updateBusinessInfo({ ...businessInfo, authorized_signature });
       navigate("/vendor/bank-info");
     } catch (err) {
-      setError("Bank information is not correct");
-      console.error("Basic Info error", err);
+      setError("Business information is not correct");
+      console.error("Business Info error", err);
     }
   };
 
@@ -60,28 +81,30 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
   };
 
   return (
-    <div className="flex flex-col w-full gap-x-2 gap-y-2 lg:flex-row">
+    <div className="flex flex-col w-11/12 gap-x-2 gap-y-2 mx-auto py-[10%] lg:flex-row">
       <div
         id="business_info"
-        className="rounded-xl bg-cubblue border-2 shadow-lg border-cubred p-3 sm:flex sm:flex-wrap sm:gap-2 lg:gap-0 lg:gap-x-2 lg:w-1/2"
+        className="rounded-xl bg-cubblue border-2 bg-opacity-80 shadow-lg border-cubred p-3 sm:flex sm:flex-wrap sm:gap-2 lg:gap-0 lg:gap-x-2 lg:w-1/2"
       >
         <form
           id="buisnessInfoForm"
           method="POST"
           onSubmit={handleBusinessClick}
         >
-          <label htmlFor="service_provided" className="text-white">
-            Service Provided
-          </label>
-          <input
-            type="text"
-            name="service_provided"
-            id="service_provided"
-            placeholder="Service Provided"
-            className="bg-white my-2 p-3"
-            value={businessInfo.service_provided}
-            onChange={handleChange}
-          />
+          <div className="flex flex-col w-full sm:w-1/4 lg:w-2/4 sm:flex-auto lg:flex-none">
+            <label htmlFor="service_provided" className="text-white">
+              Service Provided
+            </label>
+            <input
+              type="text"
+              name="service_provided"
+              id="service_provided"
+              placeholder="Service Provided"
+              className="bg-white mb-3 p-3 w-full"
+              value={businessInfo.service_provided}
+              onChange={handleChange}
+            />
+          </div>
 
           <div className="flex flex-col w-full sm:w-1/4 lg:w-2/4 sm:flex-auto lg:flex-none">
             <label
@@ -93,7 +116,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
             <select
               name="minority_ownership"
               id="minority_ownership"
-              className="bg-white my-2 w-1/4 sm:w-3/6 p-3 h-12"
+              className="bg-white mb-3 w-3/12 sm:w-3/6 p-3 h-12"
               value={businessInfo.minority_ownership}
               onChange={handleChange}
             >
@@ -111,7 +134,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
               name="authorized_name"
               id="authorized_name"
               placeholder="Authorized Name"
-              className="bg-white my-2 p-3"
+              className="bg-white mb-3 p-3"
               value={businessInfo.authorized_name}
               onChange={handleChange}
             />
@@ -126,7 +149,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
               name="authorized_phone_number"
               id="authorized_phone_number"
               placeholder="Authorized Phone Number"
-              className="bg-white w-full my-2 p-3"
+              className="bg-white w-full mb-3 p-3"
               value={businessInfo.authorized_phone_number}
               onChange={handleChange}
             />
@@ -143,29 +166,39 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
               ref={signaturePadRef}
               penColor="black"
               canvasProps={{
-                className: "signature-canvas w-full h-full",
+                className: "signature-canvas w-full h-[150px]",
                 style: { backgroundColor: "white" },
               }}
             />
-            <button
-              type="button"
-              onClick={clearSignature}
-              id="clearSignature"
-              className="bg-cubred rounded px-2 sm:w-1/3 lg:w-1/3 text-white"
-            >
-              Clear Signature
-            </button>
-          </div>
 
-          <div className="py-2 signup">
-            <button
-              type="submit"
-              id="newVendorSubmit"
-              className="hover:bg-cubred bg-cubblue border-cubred border-2 text-white px-4 py-3 rounded-xl font-medium w-full"
-            >
-              Submit
-            </button>
-          </div>
+              <button
+                type="button"
+                onClick={clearSignature}
+                id="clearSignature"
+                className="bg-cubred border  rounded-md px-2 w-5/12 mt-3 sm:w-1/3 lg:w-1/3 text-white hover:border-cubblue"
+              >
+                Clear Signature
+              </button>
+            </div>
+
+            <div className="mt-3 flex gap-x-3">
+              <button
+                type="button"
+                id="newVendorSubmit"
+                onClick={handleBackClick}
+                className="hover:border-cubred text-center bg-cubred  border text-white px-4 py-3 rounded-md font-medium w-full rounded-md border  hover:border-cubblue"
+              >
+                Back
+              </button>
+
+              <button
+                type="submit"
+                id="newVendorSubmit"
+                className=" bg-cubred border text-white px-4 py-3 rounded-xl font-medium w-full rounded-md hover:border-cubblue"
+              >
+                Next
+              </button>
+            </div>
         </form>
       </div>
     </div>

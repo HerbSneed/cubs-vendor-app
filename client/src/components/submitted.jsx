@@ -1,25 +1,27 @@
+import Welcome from "../assets/images/WELCOME.png"
 
 const VendorSubmitted = () => {
+
   return (
-    <div className="flex flex-col justify-center items-center">
+    <>
+      <div className="bg-cubblue shadow-lg w-full h-screen bg-opacity-50 flex flex-col">
+        <img className="w-11/12 mx-auto" src={Welcome} />
 
-
-      <div className="bg-white text-center px-4">
-        <p className="mt-4 text-lg text-gray-700">
-          Your form has been received. We'll contact you if we need more
-          information. To submit another vendor form, click below. Otherwise,
-          you can close the window.
+        <p className="drop-shadow-lg text-center px-7 text-lg text-white">
+          Thank you for submitting your form. We will reach out if additional
+          information is needed. To submit another vendor form, click the button
+          below. Otherwise, you may close this window.
         </p>
-      </div>
 
-      <a
-        id="newVendor"
-        className="text-center px-1 w-28 bg-cubred shadow-lg rounded-xl text-white hover:bg-cubblue cursor-pointer absolute mt-3 left-1/2 transform -translate-x-1/2"
-        href="/vendor"
-      >
-        New Vendor
-      </a>
-    </div>
+        <a
+          id="newVendor"
+          className="text-center mt-5 px-3 py-2 font-bold bg-cubred rounded-md text-white cursor-pointer mt-3 mx-auto hover:border-cubblue border"
+          href="/vendor/new-vendor"
+        >
+          New Vendor
+        </a>
+      </div>
+    </>
   );
 };
 
