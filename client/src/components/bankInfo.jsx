@@ -39,12 +39,14 @@ const BankInfo = ({ bankInfo, updateBankInfo }) => {
   };
 
   return (
-    <div
-      id="bank_info"
-      className="bg-cubblue shadow-lg border-2 rounded-xl border-cubred mx-auto p-3 sm:flex sm:flex-wrap sm:gap-x-2 w-11/12 lg:w-1/2 lg:h-2/3 mt-[25%] lg:flex lg:flex-col xl:flex-auto bg-opacity-80"
-    >
-      <form id="bankInfoForm" method="POST" onSubmit={handleBankInfoClick}>
-        <div className="flex flex-col w-full sm:w-6/12 lg:w-full">
+    <div id="bank_info" className="flex items-center justify-center mx-auto ">
+      <form
+        id="bankInfoForm"
+        method="POST"
+        onSubmit={handleBankInfoClick}
+        className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col my-[10%] sm:my-[6%] md:my-[15%] lg:my-0 gap-2 p-3 w-[350px]"
+      >
+        <div className="flex flex-col w-full lg:w-full">
           <label htmlFor="bank_name" className="text-white">
             Bank Name
           </label>
@@ -59,7 +61,7 @@ const BankInfo = ({ bankInfo, updateBankInfo }) => {
           />
         </div>
 
-        <div className="flex flex-col w-full sm:w-6/12 lg:w-full">
+        <div className="flex flex-col w-full lg:w-full">
           <label htmlFor="account_number" className="text-white">
             Account Number
           </label>
@@ -74,7 +76,7 @@ const BankInfo = ({ bankInfo, updateBankInfo }) => {
           />
         </div>
 
-        <div className="flex flex-col w-full sm:w-3/12 lg:w-full flex-auto">
+        <div className="flex flex-col w-full  lg:w-full flex-auto">
           <label htmlFor="routing_number" className="text-white">
             Routing Number
           </label>
@@ -98,7 +100,7 @@ const BankInfo = ({ bankInfo, updateBankInfo }) => {
           >
             Back
           </button>
-          
+
           <button
             type="submit"
             id="newVendorSubmit"

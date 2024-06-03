@@ -11,6 +11,7 @@ export default {
       },
       backgroundPosition: {
         'left-center': '-300px center',
+        'center': 'center center',
       },
       colors: {
         'cubblue': '#1B2D53',

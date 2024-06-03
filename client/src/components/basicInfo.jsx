@@ -48,14 +48,14 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
   };
 
   return (
-    <div id="locale">
+    <div id="locale" className="flex items-center justify-center mx-auto ">
       <form
         id="basicInfoForm"
         method="POST"
         onSubmit={handleBasicClick}
-        className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col my-[10%] gap-2 p-3 w-11/12  lg:w-1/2 xl:w-1/2"
+        className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col my-[10%] sm:my-[6%] md:my-[15%] lg:my-0 gap-2 p-3 w-[350px]"
       >
-        <div className="flex flex-wrap gap-x-2">
+        <div className="flex flex-wrap gap-x-2 mt-1">
           <label htmlFor="vendor" className="text-white w-full">
             Vendor Name
           </label>
@@ -136,7 +136,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             </div>
           </div>
 
-          <div className="flex flex-col w-full sm:w-2/3">
+          <div className="flex flex-col w-full lg:w-full">
             <label htmlFor="remittance_address" className="text-white">
               Remittance Street Address or P.O. Box
             </label>
@@ -151,7 +151,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             />
           </div>
 
-          <div className="flex flex-col w-2/3 sm:w-1/4 flex-auto">
+          <div className="flex flex-col w-2/3 flex-auto">
             <label htmlFor="city" className="text-white">
               City
             </label>
@@ -166,7 +166,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             />
           </div>
 
-          <div className="flex flex-col w-1/4 sm:w-1/3 flex-auto">
+          <div className="flex flex-col w-1/4 sm:w-[10%] md:w-[40%] flex-auto">
             <label htmlFor="state" className="text-white">
               State
             </label>
@@ -181,7 +181,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             />
           </div>
 
-          <div className="flex flex-col w-2/4 sm:w-1/3">
+          <div className="flex flex-col w-2/4 sm:w-[30%]">
             <label htmlFor="zip_code" className="text-white">
               Zip Code
             </label>
@@ -196,7 +196,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             />
           </div>
 
-          <div className="flex flex-col w-1/4 flex-auto">
+          <div className="flex flex-col w-1/4 sm:w-[25%] flex-auto">
             <label htmlFor="country" className="text-white">
               Country
             </label>
@@ -211,7 +211,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             />
           </div>
 
-          <div className="flex flex-col w-2/4 flex-auto">
+          <div className="flex flex-col w-full flex">
             <label htmlFor="remittance_email" className="text-white">
               Remittance Email
             </label>
@@ -227,11 +227,11 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
           </div>
         </div>
 
-        <div className="mt-3 flex gap-x-3">
+        <div className="flex gap-x-3">
           <button
             type="button"
             id="newVendorSubmit"
-            onClick={ handleBackClick }
+            onClick={handleBackClick}
             className="hover:border-cubred text-center bg-cubred  border text-white px-4 py-3 rounded-md font-medium w-full rounded-md border  hover:border-cubblue"
           >
             Back

@@ -1,8 +1,7 @@
 const welcome = ({ onNewVendorClick }) => {
   return (
 
-
-      <div className="flex flex-col mx-auto rounded-lg bg-gray-100 w-[92%] px-2 py-10 items-center justify-center mt-[40%] bg-opacity-70 gap-y-5">
+      <div className="flex flex-col mx-auto rounded-lg bg-gray-100 w-[350px] -mt-10  px-2 py-10 items-center justify-center bg-opacity-70 gap-y-5">
         <h1 className="font-bold text-2xl text-cubblue text-center">
           Welcome to the Cubs Vendor Sign up app!
         </h1>
