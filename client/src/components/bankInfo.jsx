@@ -26,7 +26,7 @@ const BankInfo = ({ bankInfo, updateBankInfo }) => {
 
     try {
       updateBankInfo(bankInfo);
-      navigate("/vendor/submitted");
+      navigate("/vendor/review-info");
     } catch (err) {
       setError("Bank information is not correct");
       console.error("Bank Info error", err);

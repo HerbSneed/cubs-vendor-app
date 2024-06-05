@@ -1,20 +1,32 @@
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
+import { updateDisclaimerInfo } from "../utils/redux/actions/actions";
+import { useState} from "react"
 
 
-const Disclaimer = () => {
+const Disclaimer = ({ disclaimerInfo, updateDisclaimerInfo }) => {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
 
   const handleAgree = async (event) => {
     event.preventDefault();
-    navigate("/vendor/business-info")
+    // Update the disclaimer_agreement property to true
+    const updatedDisclaimerInfo = {
+      ...disclaimerInfo,
+      disclaimer_agreement: "Agreed",
+    };
+    // Call updateDisclaimerInfo with the updated object
+    updateDisclaimerInfo(updatedDisclaimerInfo);
+    navigate("/vendor/business-info");
   };
 
   const handleDisagree = async (event) => {
     event.preventDefault();
     alert("Please agree to above disclaimer to continue.")
   };
+
+
 
 
   return (
@@ -58,4 +70,12 @@ const Disclaimer = () => {
   );
 };
 
-export default Disclaimer;
+const mapStateToProps = (state) => ({
+  disclaimerInfo: state.disclaimerInfo,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateDisclaimerInfo: (data) => dispatch(updateDisclaimerInfo(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Disclaimer);

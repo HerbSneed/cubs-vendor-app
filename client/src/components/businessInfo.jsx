@@ -100,7 +100,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
             name="service_provided"
             id="service_provided"
             placeholder="Service Provided"
-            className="bg-white mb-3 p-3 w-full"
+            className="bg-white mb-1 p-3 w-full"
             value={businessInfo.service_provided}
             onChange={handleChange}
           />
@@ -113,7 +113,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
           <select
             name="minority_ownership"
             id="minority_ownership"
-            className="bg-white mb-3 w-4/12 sm:w-full p-3 h-12"
+            className="bg-white mb-1 w-4/12 sm:w-full p-3 h-12"
             value={businessInfo.minority_ownership}
             onChange={handleChange}
           >
@@ -131,7 +131,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
             name="authorized_name"
             id="authorized_name"
             placeholder="Authorized Name"
-            className="bg-white mb-3 p-3"
+            className="bg-white mb-1 p-3"
             value={businessInfo.authorized_name}
             onChange={handleChange}
           />
@@ -146,7 +146,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
             name="authorized_phone_number"
             id="authorized_phone_number"
             placeholder="222-333-1234"
-            className="bg-white w-full mb-3 p-3"
+            className="bg-white w-full mb-1 p-3"
             value={businessInfo.authorized_phone_number}
             onChange={handleChange}
           />

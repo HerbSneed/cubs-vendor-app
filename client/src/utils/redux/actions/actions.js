@@ -4,6 +4,12 @@ export const updateBasicInfo = (data) => ({
   payload: data,
 });
 
+export const UPDATE_DISCLAIMER_INFO = "UPDATE_DISCLAIMER_INFO";
+export const updateDisclaimerInfo = (data) => ({
+  type: UPDATE_DISCLAIMER_INFO,
+  payload: data,
+});
+
 
 
 export const UPDATE_BUSINESS_INFO = "UPDATE_BUSINESS_INFO";

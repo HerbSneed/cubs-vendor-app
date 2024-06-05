@@ -1,12 +1,31 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { updateBasicInfo } from "../../src/utils/redux/actions/actions";
+import provinces from "provinces"
+import containsChinese from "contains-chinese";
+
+
 
 
 const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const [provincesData, setProvincesData] = useState([]);
+  const [country, setCountry] = useState("");
+
+    const handleCountryChange = (val) => {
+      setCountry(val);
+    };
+
+  useEffect(() => {
+    // Assuming 'provinces' is the JSON data
+    setProvincesData(provinces);
+  }, []);
+
+
+
+  
 
   const handleBackClick = () => {
     navigate(-1);
@@ -55,7 +74,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
         onSubmit={handleBasicClick}
         className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col my-[10%] sm:my-[6%] md:my-[15%] lg:my-0 gap-2 p-3 w-[350px]"
       >
-        <div className="flex flex-wrap gap-x-2 mt-1">
+        <div className="flex flex-wrap gap-x-2 mt-">
           <label htmlFor="vendor" className="text-white w-full">
             Vendor Name
           </label>
@@ -151,7 +170,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             />
           </div>
 
-          <div className="flex flex-col w-2/3 flex-auto">
+          <div className="flex flex-col w-[67%]">
             <label htmlFor="city" className="text-white">
               City
             </label>
@@ -162,21 +181,6 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               value={basicInfo.city}
               onChange={handleChange}
               placeholder="City"
-              className="bg-white mb-3 p-3"
-            />
-          </div>
-
-          <div className="flex flex-col w-1/4 sm:w-[10%] md:w-[40%] flex-auto">
-            <label htmlFor="state" className="text-white">
-              State
-            </label>
-            <input
-              type="text"
-              name="state"
-              id="state"
-              value={basicInfo.state}
-              onChange={handleChange}
-              placeholder="State"
               className="bg-white mb-3 p-3"
             />
           </div>
@@ -194,6 +198,32 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
               placeholder="Zip Code"
               className="bg-white mb-3 p-3"
             />
+          </div>
+
+          <div className="flex flex-col w-[67%]">
+            <label htmlFor="state" className="text-white">
+              State / Province
+            </label>
+            <select
+              name="state"
+              id="state"
+              value={basicInfo.state}
+              onChange={handleChange}
+              className="bg-white mb-3 p-3.5 w-full"
+            >
+              <option value="">Select</option>
+              {provinces.length > 0 &&
+                provinces.map((province) => (
+                  <option
+                    key={`${province.short}-${province.name}-${province.country}-${province.region}`}
+                    value={province.short}
+                  >
+                    {containsChinese(province.name) && province["english"]
+                      ? province["english"]
+                      : province.name}
+                  </option>
+                ))}
+            </select>
           </div>
 
           <div className="flex flex-col w-1/4 sm:w-[25%] flex-auto">

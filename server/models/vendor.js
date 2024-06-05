@@ -91,7 +91,11 @@ Vendor.init(
     routing_number: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    disclaimer_agreement: {
+      type: DataTypes.STRING,
+      defaultValue: "Agreed"
+    },
   },
   {
     hooks: {
