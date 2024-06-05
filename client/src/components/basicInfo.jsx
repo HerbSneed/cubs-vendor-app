@@ -13,6 +13,10 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
   const [error, setError] = useState(null);
   const [provincesData, setProvincesData] = useState([]);
   const [country, setCountry] = useState("");
+  const uniqueCountries = Array.from(
+    new Set(provinces.map((province) => province.country))
+  );
+
 
     const handleCountryChange = (val) => {
       setCountry(val);
@@ -230,15 +234,20 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             <label htmlFor="country" className="text-white">
               Country
             </label>
-            <input
-              type="text"
+            <select
               name="country"
               id="country"
               value={basicInfo.country}
               onChange={handleChange}
-              placeholder="Country"
-              className="bg-white mb-3 p-3"
-            />
+              className="bg-white mb-3 p-3.5 w-full"
+            >
+              <option value="">Select</option>
+              {uniqueCountries.map((country, index) => (
+                <option key={index} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="flex flex-col w-full flex">
