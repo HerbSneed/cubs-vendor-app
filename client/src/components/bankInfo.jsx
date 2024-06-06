@@ -94,7 +94,7 @@ const BankInfo = ({ bankInfo, updateBankInfo }) => {
         <div className="mt-3 flex gap-x-3">
           <button
             type="button"
-            id="newVendorSubmit"
+            id="backButton"
             onClick={handleBackClick}
             className="hover:border-cubred text-center bg-cubred  border text-white px-4 py-3 rounded-md font-medium w-full rounded-md border  hover:border-cubblue"
           >
@@ -103,7 +103,7 @@ const BankInfo = ({ bankInfo, updateBankInfo }) => {
 
           <button
             type="submit"
-            id="newVendorSubmit"
+            id="nextButton"
             className=" bg-cubred border text-white px-4 py-3 cursor-pointer font-medium w-full rounded-md hover:border-cubblue"
           >
             Next

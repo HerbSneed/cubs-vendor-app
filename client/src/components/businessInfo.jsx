@@ -178,7 +178,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
 
           <div className="mt-3 flex gap-x-3">
             <button
-              type="button"
+              type="backButton"
               id="newVendorSubmit"
               onClick={handleBackClick}
               className="cursor-pointer hover:border-cubred text-center bg-cubred  border text-white px-4 py-3 rounded-md font-medium w-full rounded-lg border  hover:border-cubblue"
@@ -188,7 +188,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
 
             <button
               type="submit"
-              id="newVendorSubmit"
+              id="nextButton"
               className="cursor-pointer bg-cubred border text-white px-4 py-3 rounded-lg font-medium w-full rounded-md hover:border-cubblue"
             >
               Next

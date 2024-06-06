@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import basicInfoReducer from './reducers/basicInfoReducers';
-import basicBankReducer from './reducers/bankInfoReducers';
-import basicBusinessReducer from './reducers/businessInfoReducers';
-import basicDisclaimerReducer from './reducers/basicDisclaimerReducers';
+import basicInfoReducer from './reducers/basicInfoReducers.js';
+import basicBankReducer from './reducers/bankInfoReducers.js';
+import basicBusinessReducer from './reducers/businessInfoReducers.js';
+import basicDisclaimerReducer from './reducers/basicDisclaimerReducers.js';
 
 const rootReducer = combineReducers ({
   basicInfo: basicInfoReducer,

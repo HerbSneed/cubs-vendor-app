@@ -1,4 +1,4 @@
-import { UPDATE_BANK_INFO } from "../actions/actions";
+import { UPDATE_BANK_INFO } from "../actions/actions.js";
 
 const initialBankState = {
   bank_name: "",

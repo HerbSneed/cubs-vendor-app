@@ -29,7 +29,7 @@ const startServer = async () => {
       res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   } else {
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname, '../client/')));
   }
 
   const force = process.env.FORCE_SYNC === 'true';

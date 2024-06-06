@@ -5,9 +5,6 @@ import { updateBasicInfo } from "../../src/utils/redux/actions/actions";
 import provinces from "provinces"
 import containsChinese from "contains-chinese";
 
-
-
-
 const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -17,19 +14,14 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
     new Set(provinces.map((province) => province.country))
   );
 
-
-    const handleCountryChange = (val) => {
+  const handleCountryChange = (val) => {
       setCountry(val);
-    };
+  };
 
   useEffect(() => {
     // Assuming 'provinces' is the JSON data
     setProvincesData(provinces);
   }, []);
-
-
-
-  
 
   const handleBackClick = () => {
     navigate(-1);
@@ -71,6 +63,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
   };
 
   return (
+    
     <div id="locale" className="flex items-center justify-center mx-auto ">
       <form
         id="basicInfoForm"
@@ -269,7 +262,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
         <div className="flex gap-x-3">
           <button
             type="button"
-            id="newVendorSubmit"
+            id="backButton"
             onClick={handleBackClick}
             className="hover:border-cubred text-center bg-cubred  border text-white px-4 py-3 rounded-md font-medium w-full rounded-md border  hover:border-cubblue"
           >
@@ -278,7 +271,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
 
           <button
             type="submit"
-            id="newVendorSubmit"
+            id="nextButton"
             className="hover:border-cubred bg-cubred  border text-white px-4 py-3 rounded-md font-medium w-full rounded-md border  hover:border-cubblue"
           >
             Next

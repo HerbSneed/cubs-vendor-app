@@ -1,4 +1,4 @@
-import Welcome from "../assets/images/WELCOME.png"
+import Welcome from "../assets/images/WELCOME.webp"
 
 const VendorSubmitted = () => {
 
