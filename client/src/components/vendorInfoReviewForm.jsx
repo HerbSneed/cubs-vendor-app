@@ -146,7 +146,7 @@ const VendorInfoReviewForm = () => {
     <>
       <div className="flex flex-col my-4 justify-center items-center w-full lg:justify-start">
         <div className="lg:absolute lg:mt-[90px] top-0 text-center lg:text-lg w-[350px] lg:w-[400px] ">
-          <p className="mx-4 text-white">
+          <p className="Roboto mx-4 text-white">
             Review the information you provided before submitting. Click the
             edit button to make corrections.
           </p>

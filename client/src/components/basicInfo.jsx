@@ -66,13 +66,12 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
     
     <div id="locale" className="flex items-center justify-center mx-auto ">
       <form
-        id="basicInfoForm"
         method="POST"
         onSubmit={handleBasicClick}
         className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col my-[10%] sm:my-[6%] md:my-[15%] lg:my-0 gap-2 p-3 w-[350px]"
       >
         <div className="flex flex-wrap gap-x-2 mt-">
-          <label htmlFor="vendor" className="text-white w-full">
+          <label htmlFor="vendor_name" className="text-white w-full">
             Vendor Name
           </label>
           <input
@@ -85,7 +84,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             className="bg-white w-full mb-3 p-3"
           />
 
-          <label htmlFor="contact_info" className="text-white w-full">
+          <label className="text-white w-full">
             Contact Name
           </label>
           <div className="flex justify-between w-full">
@@ -182,7 +181,7 @@ const BasicInfo = ({ basicInfo, updateBasicInfo }) => {
             />
           </div>
 
-          <div className="flex flex-col w-2/4 sm:w-[30%]">
+          <div className="flex flex-col w-[30%] sm:w-[30%]">
             <label htmlFor="zip_code" className="text-white">
               Zip Code
             </label>

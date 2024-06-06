@@ -41,7 +41,6 @@ const BankInfo = ({ bankInfo, updateBankInfo }) => {
   return (
     <div id="bank_info" className="flex items-center justify-center mx-auto ">
       <form
-        id="bankInfoForm"
         method="POST"
         onSubmit={handleBankInfoClick}
         className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col my-[10%] sm:my-[6%] md:my-[15%] lg:my-0 gap-2 p-3 w-[350px]"

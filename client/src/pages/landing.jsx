@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Welcome from "../components/welcome";
+import { lazy } from "react";
+const Welcome = lazy(() =>  import("../components/welcome"));
 
 
 const Landing = () => {

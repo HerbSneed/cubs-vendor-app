@@ -86,7 +86,6 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
       className="flex items-center justify-center mx-auto "
     >
       <form
-        id="buisnessInfoForm"
         method="POST"
         onSubmit={handleBusinessClick}
         className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col sm:flex-row sm:flex-wrap my-[10%] sm:my-[6%] md:my-[15%] lg:my-0 gap-2 p-3 w-[350px]"
