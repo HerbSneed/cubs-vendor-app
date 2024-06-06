@@ -1,4 +1,4 @@
-import { UPDATE_BUSINESS_INFO } from "../actions/actions";
+import { UPDATE_BUSINESS_INFO } from "../actions/actions.js";
 
 const initialBusinessState = {
   service_provided: "",

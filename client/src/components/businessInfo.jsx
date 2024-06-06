@@ -86,7 +86,6 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
       className="flex items-center justify-center mx-auto "
     >
       <form
-        id="buisnessInfoForm"
         method="POST"
         onSubmit={handleBusinessClick}
         className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col sm:flex-row sm:flex-wrap my-[10%] sm:my-[6%] md:my-[15%] lg:my-0 gap-2 p-3 w-[350px]"
@@ -178,7 +177,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
 
           <div className="mt-3 flex gap-x-3">
             <button
-              type="button"
+              type="backButton"
               id="newVendorSubmit"
               onClick={handleBackClick}
               className="cursor-pointer hover:border-cubred text-center bg-cubred  border text-white px-4 py-3 rounded-md font-medium w-full rounded-lg border  hover:border-cubblue"
@@ -188,7 +187,7 @@ const BusinessInfo = ({ businessInfo, updateBusinessInfo }) => {
 
             <button
               type="submit"
-              id="newVendorSubmit"
+              id="nextButton"
               className="cursor-pointer bg-cubred border text-white px-4 py-3 rounded-lg font-medium w-full rounded-md hover:border-cubblue"
             >
               Next

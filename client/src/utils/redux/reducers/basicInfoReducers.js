@@ -1,4 +1,4 @@
-import { UPDATE_BASIC_INFO } from "../actions/actions";
+import { UPDATE_BASIC_INFO } from "../actions/actions.js";
 
 
 const initialBasicState = {

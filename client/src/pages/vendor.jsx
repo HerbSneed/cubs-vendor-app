@@ -1,10 +1,14 @@
 import { useState } from "react";
-import Welcome from "../components/welcome";
-import BasicInfo from "../components/basicInfo";
-import BuisnessInfo from "../components/businessInfo";
-import BankInfo from "../components/bankInfo";
-import Disclaimer from "../components/disclaimer";
-import VendorInfoReviewForm from "../components/vendorInfoReviewForm";
+import { lazy } from "react";
+
+const BasicInfo = lazy(() => import("../components/bankInfo"))
+const BuisnessInfo = lazy(() => import("../components/BuisnessInfo"));
+const BankInfo = lazy(() => import("../components/BankInfo"));
+const Disclaimer = lazy(() => import("../components/Disclaimer"));
+const VendorInfoReviewForm = lazy(
+  () => import("../components/VendorInfoReviewForm")
+);
+
 
 const Vendor = () => {
   const [isBasicComplete, setIsBasicComplete] = useState(false);

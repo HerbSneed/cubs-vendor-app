@@ -1,12 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { updateDisclaimerInfo } from "../utils/redux/actions/actions";
-import { useState} from "react"
-
 
 const Disclaimer = ({ disclaimerInfo, updateDisclaimerInfo }) => {
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
+
 
 
   const handleAgree = async (event) => {
@@ -55,12 +53,14 @@ const Disclaimer = ({ disclaimerInfo, updateDisclaimerInfo }) => {
           <button
             className="bg-cubred py-2 px-6 hover:border-cubred bg-cubred  border text-white px-4 py-3 rounded-md  hover:bg-cubblue rounded-md border  hover:border-cubblue rounded-md"
             onClick={handleAgree}
+            id="agreeButton"
           >
             Agree
           </button>
           <button
             className="bg-cubred p-2 hover:border-cubred bg-cubred  border text-white px-4 py-3 rounded-md  hover:bg-cubblue rounded-md border  hover:border-cubblue rounded-md"
             onClick={handleDisagree}
+            id="disagreeButton"
           >
             Disagree
           </button>

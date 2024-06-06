@@ -1,4 +1,4 @@
-import { UPDATE_DISCLAIMER_INFO } from "../actions/actions";
+import { UPDATE_DISCLAIMER_INFO } from "../actions/actions.js";
 
 const initialDisclaimerState = {
  disclaimer_agreement: false,

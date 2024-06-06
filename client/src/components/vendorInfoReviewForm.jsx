@@ -9,6 +9,8 @@ import {
   updateDisclaimerInfo,
 } from "../../src/utils/redux/actions/actions";
 import SignatureCanvas from "react-signature-canvas";
+import provinces from "provinces";
+import containsChinese from "contains-chinese";
 
 const VendorInfoReviewForm = () => {
   const navigate = useNavigate();
@@ -18,6 +20,9 @@ const VendorInfoReviewForm = () => {
   const businessInfo = useSelector((state) => state.businessInfo);
   const bankInfo = useSelector((state) => state.bankInfo);
   const disclaimerInfo = useSelector((state) => state.disclaimerInfo);
+  const uniqueCountries = Array.from(
+    new Set(provinces.map((province) => province.country))
+  );
 
   const [formState, setFormState] = useState({
     ...basicInfo,
@@ -140,12 +145,12 @@ const VendorInfoReviewForm = () => {
   return (
     <>
       <div className="flex flex-col my-4 justify-center items-center w-full lg:justify-start">
-        <section className="lg:absolute lg:mt-[90px] top-0 text-center lg:text-lg w-[350px] lg:w-[400px] ">
-          <p className="mx-4 text-white drop-shadow-sm">
+        <div className="lg:absolute lg:mt-[90px] top-0 text-center lg:text-lg w-[350px] lg:w-[400px] ">
+          <p className="Roboto mx-4 text-white">
             Review the information you provided before submitting. Click the
             edit button to make corrections.
           </p>
-        </section>
+        </div>
 
         <form
           onSubmit={handleSubmit}
@@ -154,7 +159,7 @@ const VendorInfoReviewForm = () => {
         >
           {/* BASIC INFO */}
 
-          <section className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl flex flex-col my-[2%] lg:my-0 gap-2 p-3 w-[350px] mx-auto">
+          <section className="bg-cubblue border-2 border-cubred bg-opacity-80 shadow-lg rounded-xl mx-auto flex flex-col my-[5%] lg:my-0 gap-2 p-3 w-[350px]">
             <div className="flex justify-between">
               <h2 className="text-3xl text-white font-bold">
                 Basic Information
@@ -169,7 +174,7 @@ const VendorInfoReviewForm = () => {
               </button>
             </div>
 
-            <div className="w-full flex flex-col mt-1">
+            <div className="w-full flex mb-4 flex-col">
               <label htmlFor="vendor" className="text-white w-1/2">
                 Vendor Name:
               </label>
@@ -180,12 +185,12 @@ const VendorInfoReviewForm = () => {
                 value={formState.vendor_name}
                 onChange={handleEdit}
                 readOnly={!editMode.basicInfo}
-                className="bg-white mb-3 px-1"
+                className={`bg-white  px-1 ${editMode.basicInfo ? "bg-yellow-100" : ""}`}
               />
             </div>
 
-            <div className="flex w-full gap-x-3 ">
-              <div className="flex flex-col w-5/12 mt-1">
+            <div className="flex flex-wrap gap-x-3 gap-y-2 ">
+              <div className="flex flex-col w-5/12">
                 <label htmlFor="vendor" className="text-white">
                   First Name:
                 </label>
@@ -195,11 +200,11 @@ const VendorInfoReviewForm = () => {
                   value={formState.contact_firstName}
                   onChange={handleEdit}
                   readOnly={!editMode.basicInfo}
-                  className="bg-white mb-3 px-1"
+                  className={`bg-white px-1 ${editMode.basicInfo ? "bg-yellow-100" : ""}`}
                 />
               </div>
 
-              <div className="flex flex-col w-5/12 mt-1">
+              <div className="flex flex-col w-5/12">
                 <label className="text-white">Last Name:</label>
                 <input
                   type="text"
@@ -207,11 +212,11 @@ const VendorInfoReviewForm = () => {
                   value={formState.contact_lastName}
                   onChange={handleEdit}
                   readOnly={!editMode.basicInfo}
-                  className="text-black px-1"
+                  className={`bg-white px-1 ${editMode.basicInfo ? "bg-yellow-100" : ""}`}
                 />
               </div>
 
-              <div className="flex flex-col w-1/12  mt-1">
+              <div className="flex flex-col w-1/12 ">
                 <label className="text-white">M.I.</label>
                 <input
                   type="text"
@@ -219,51 +224,49 @@ const VendorInfoReviewForm = () => {
                   value={formState.contact_MiddleInt}
                   onChange={handleEdit}
                   readOnly={!editMode.basicInfo}
-                  className="text-black text-center"
+                  className={`bg-white text-center ${editMode.basicInfo ? `bg-yellow-100` : ``}`}
                 />
               </div>
-            </div>
 
-            <div className="w-full flex gap-x-3">
-              <div className="flex flex-col w-6/12">
-                <label className="text-white">Vendor Tax ID/SSN:</label>
+              <div className="w-full flex gap-x-3">
+                <div className="flex flex-col w-6/12">
+                  <label className="text-white">Vendor Tax ID/SSN:</label>
+                  <input
+                    type="text"
+                    name="tax_id"
+                    value={formState.tax_id}
+                    onChange={handleEdit}
+                    readOnly={!editMode.basicInfo}
+                    className={`bg-white px-1 ${editMode.basicInfo ? `bg-yellow-100` : ``}`}
+                  />
+                </div>
+
+                <div className="flex flex-col w-6/12">
+                  <label className="text-white">Contact Phone #:</label>
+                  <input
+                    type="text"
+                    name="contact_phone_number"
+                    value={formState.contact_phone_number}
+                    onChange={handleEdit}
+                    readOnly={!editMode.basicInfo}
+                    className={`bg-white px-1 mr-3 ${editMode.basicInfo ? `bg-yellow-100` : ``}`}
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col w-full lg:w-full">
+                <label className="text-white">Remittance Address:</label>
                 <input
                   type="text"
-                  name="tax_id"
-                  value={formState.tax_id}
+                  name="remittance_address"
+                  value={formState.remittance_address}
                   onChange={handleEdit}
                   readOnly={!editMode.basicInfo}
-                  className="text-black"
+                  className={`bg-white px-1 ${editMode.basicInfo ? `bg-yellow-100` : ``}`}
                 />
               </div>
 
-              <div className="flex flex-col w-6/12">
-                <label className="text-white">Contact Phone #:</label>
-                <input
-                  type="text"
-                  name="contact_phone_number"
-                  value={formState.contact_phone_number}
-                  onChange={handleEdit}
-                  readOnly={!editMode.basicInfo}
-                  className="text-black px-1 mr-3"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col w-full lg:w-full">
-              <label className="text-white">Remittance Address:</label>
-              <input
-                type="text"
-                name="remittance_address"
-                value={formState.remittance_address}
-                onChange={handleEdit}
-                readOnly={!editMode.basicInfo}
-                className="text-black px-1"
-              />
-            </div>
-
-            <div className="w-full flex">
-              <div className="flex flex-col w-8/12">
+              <div className="flex flex-col w-[71%]">
                 <label className="text-white">City:</label>
                 <input
                   type="text"
@@ -271,23 +274,11 @@ const VendorInfoReviewForm = () => {
                   value={formState.city}
                   onChange={handleEdit}
                   readOnly={!editMode.basicInfo}
-                  className="text-black px-1 mr-3"
+                  className={`bg-white px-1 ${editMode.basicInfo ? `bg-yellow-100` : ``}`}
                 />
               </div>
 
-              <div className="flex flex-col w-2/12">
-                <label className="text-white">State:</label>
-                <input
-                  type="text"
-                  name="state"
-                  value={formState.state}
-                  onChange={handleEdit}
-                  readOnly={!editMode.basicInfo}
-                  className="text-black px-1 mr-3"
-                />
-              </div>
-
-              <div className="flex flex-col w-3/12">
+              <div className="flex flex-col w-[25%]">
                 <label className="text-white">Zipcode:</label>
                 <input
                   type="text"
@@ -295,33 +286,84 @@ const VendorInfoReviewForm = () => {
                   value={formState.zip_code}
                   onChange={handleEdit}
                   readOnly={!editMode.basicInfo}
-                  className="text-black px-1 mr-2"
+                  className={`bg-white px-1 ${editMode.basicInfo ? `bg-yellow-100` : ``}`}
                 />
               </div>
-            </div>
 
-            <div className="flex flex-col w-8/12">
-              <label className="text-white">Country:</label>
-              <input
-                type="text"
-                name="country"
-                value={formState.country}
-                onChange={handleEdit}
-                readOnly={!editMode.basicInfo}
-                className="text-black px-1 mr-3"
-              />
-            </div>
+              <div className="flex flex-col w-[76%]">
+                <label className="text-white">State / Province: </label>
+                {editMode.basicInfo ? (
+                  <select
+                    name="state"
+                    value={formState.state}
+                    onChange={handleEdit}
+                    className="bg-yellow-100 py-[2px]"
+                  >
+                    <option value="">Select</option>
+                    {provinces.length > 0 &&
+                      provinces.map((province) => (
+                        <option
+                          key={`${province.short}-${province.name}-${province.country}-${province.region}`}
+                          value={province.name}
+                        >
+                          {containsChinese(province.name) && province["english"]
+                            ? province["english"]
+                            : province.name}
+                        </option>
+                      ))}
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    name="state"
+                    value={formState.state}
+                    onChange={handleEdit}
+                    readOnly={!editMode.basicInfo}
+                    className={`bg-white px-1 ${editMode.basicInfo ? "bg-yellow-100" : ""}`}
+                  />
+                )}
+              </div>
 
-            <div className="flex flex-col w-12/12">
-              <label className="text-white">Remittance Email:</label>
-              <input
-                type="text"
-                name="remittance_email"
-                value={formState.remittance_email}
-                onChange={handleEdit}
-                readOnly={!editMode.basicInfo}
-                className="text-black px-1"
-              />
+              <div className="flex flex-col w-[20%]">
+                <label className="text-white">Country:</label>
+                {editMode.basicInfo ? (
+                  <select
+                    name="country"
+                    id="country"
+                    value={formState.country}
+                    onChange={handleEdit}
+                    className="bg-white py-[2px]  w-full bg-yellow-100"
+                  >
+                    <option value="">Select</option>
+                    {uniqueCountries.map((country, index) => (
+                      <option key={index} value={country}>
+                        {country}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    name="country"
+                    value={formState.country}
+                    onChange={handleEdit}
+                    readOnly={!editMode.basicInfo}
+                    className={`bg-white px-1 ${editMode.basicInfo ? `bg-yellow-100` : ``}`}
+                  />
+                )}
+              </div>
+
+              <div className="flex flex-col w-full">
+                <label className="text-white">Remittance Email:</label>
+                <input
+                  type="text"
+                  name="remittance_email"
+                  value={formState.remittance_email}
+                  onChange={handleEdit}
+                  readOnly={!editMode.basicInfo}
+                  className={`bg-white px-1 ${editMode.basicInfo ? `bg-yellow-100` : ``}`}
+                />
+              </div>
             </div>
           </section>
 
@@ -347,7 +389,7 @@ const VendorInfoReviewForm = () => {
                 value={formState.service_provided}
                 onChange={handleEdit}
                 readOnly={!editMode.businessInfo}
-                className="text-black px-1"
+                className={`bg-white px-1 ${editMode.businessInfo ? `bg-yellow-100` : ``}`}
               />
             </div>
 
@@ -358,6 +400,7 @@ const VendorInfoReviewForm = () => {
                 value={formState.minority_ownership}
                 onChange={handleEdit}
                 disabled={!editMode.businessInfo}
+                className={`bg-white px-1 mr-3 ${editMode.businessInfo ? `bg-yellow-100` : ``}`}
               >
                 <option value={true}>Yes</option>
                 <option value={false}>No</option>
@@ -373,7 +416,7 @@ const VendorInfoReviewForm = () => {
                   value={formState.authorized_name}
                   onChange={handleEdit}
                   readOnly={!editMode.businessInfo}
-                  className="text-black px-1"
+                  className={`bg-white px-1 ${editMode.businessInfo ? `bg-yellow-100` : ``}`}
                 />
               </div>
 
@@ -385,7 +428,7 @@ const VendorInfoReviewForm = () => {
                   value={formState.authorized_phone_number}
                   onChange={handleEdit}
                   readOnly={!editMode.businessInfo}
-                  className="text-black mr-2 px-1"
+                  className={`bg-white px-1 mr-2 ${editMode.businessInfo ? `bg-yellow-100` : ``}`}
                 />
               </div>
             </div>
@@ -397,7 +440,7 @@ const VendorInfoReviewForm = () => {
                   <SignatureCanvas
                     penColor="black"
                     canvasProps={{
-                      className: "signature-canvas w-full h-[150px] bg-white",
+                      className: `signature-canvas w-full h-[148px] bg-yellow-100 `,
                     }}
                     ref={sigCanvas}
                   />
@@ -423,7 +466,7 @@ const VendorInfoReviewForm = () => {
                   <img
                     src={signature}
                     alt="Authorized Signature"
-                    className="my-2 bg-cubred h-[150px]"
+                    className="bg-white h-[186px]"
                   />
                 )
               )}
@@ -453,7 +496,7 @@ const VendorInfoReviewForm = () => {
                 value={formState.bank_name}
                 onChange={handleEdit}
                 readOnly={!editMode.bankInfo}
-                className="px-1"
+                className={`bg-white px-1 ${editMode.bankInfo ? `bg-yellow-100` : ``}`}
               />
             </div>
 
@@ -466,7 +509,7 @@ const VendorInfoReviewForm = () => {
                   value={formState.account_number}
                   onChange={handleEdit}
                   readOnly={!editMode.bankInfo}
-                  className="px-1"
+                  className={`bg-white px-1 ${editMode.bankInfo ? `bg-yellow-100` : ``}`}
                 />
               </div>
 
@@ -478,7 +521,7 @@ const VendorInfoReviewForm = () => {
                   value={formState.routing_number}
                   onChange={handleEdit}
                   readOnly={!editMode.bankInfo}
-                  className="mr-2 px-1"
+                  className={`bg-white px-1 mr-3 ${editMode.bankInfo ? `bg-yellow-100` : ``}`}
                 />
               </div>
             </div>
@@ -491,7 +534,7 @@ const VendorInfoReviewForm = () => {
               type="submit"
               onClick={handleSubmit}
               id="newVendorSubmit"
-              className="cursor-pointer hover:border-cubred bg-cubred border text-white px-4 py-3 lg:w-[125px] rounded-md font-medium w-full rounded-md border  hover:border-cubblue "
+              className="cursor-pointer hover:border-cubred bg-cubred border text-white px-4 py-3 lg:-mt-2 lg:w-[350px] rounded-md font-medium w-full rounded-md border  hover:border-cubblue "
             >
               Submit
             </button>
